@@ -1,6 +1,8 @@
 package com.testproject.andrey.unzipper;
 
 import java.io.*;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -15,7 +17,7 @@ public class UnzipUtility {
         File destDir = new File(dest);
         if (!destDir.exists()) {
             try {
-                UnzipUtility.unzip("data.zip", dest);
+                UnzipUtility.unzip("zippedData", dest);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -30,11 +32,36 @@ public class UnzipUtility {
      * @throws IOException
      */
     private static void unzip(String zipFilePath, String destDirectory) throws IOException {
+        File dir = new File(zipFilePath);
         File destDir = new File(destDirectory);
         if (!destDir.exists()) {
             destDir.mkdir();
         }
-        ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
+        FileOutputStream fos = new FileOutputStream(new File(
+                destDirectory + "/data.zip"));
+        FileInputStream fis = null;
+
+        Set<String> files = new TreeSet<>();
+        for (String fname : dir.list()) {
+            files.add(fname);
+        }
+
+        for (String fname : files) {
+            try {
+                fis = new FileInputStream(new File(dir.getAbsolutePath(), fname));
+                byte[] b = new byte[fis.available()];
+                fis.read(b);
+                fos.write(b);
+            } finally {
+                if (fis != null) {
+                    fis.close();
+                }
+                fos.flush();
+            }
+        }
+        fos.close();
+
+        ZipInputStream zipIn = new ZipInputStream(new FileInputStream(destDirectory + "/data.zip"));
         ZipEntry entry = zipIn.getNextEntry();
         // iterates over entries in the zip file
         while (entry != null) {
@@ -44,8 +71,8 @@ public class UnzipUtility {
                 extractFile(zipIn, filePath);
             } else {
                 // if the entry is a directory, make the directory
-                File dir = new File(filePath);
-                dir.mkdir();
+                File directory = new File(filePath);
+                directory.mkdir();
             }
             zipIn.closeEntry();
             entry = zipIn.getNextEntry();
