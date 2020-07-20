@@ -17,7 +17,7 @@ public class UnzipUtility {
         File destDir = new File(dest);
         if (!destDir.exists()) {
             try {
-                UnzipUtility.unzip("zippedData", dest);
+                UnzipUtility.unzip(dest);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -27,12 +27,11 @@ public class UnzipUtility {
     /**
      * Extracts a zip file specified by the zipFilePath to a directory specified by
      * destDirectory (will be created if does not exists)
-     * @param zipFilePath
      * @param destDirectory
      * @throws IOException
      */
-    private static void unzip(String zipFilePath, String destDirectory) throws IOException {
-        File dir = new File(zipFilePath);
+    private static void unzip(String destDirectory) throws IOException {
+        File dir = new File("zippedData");
         File destDir = new File(destDirectory);
         if (!destDir.exists()) {
             destDir.mkdir();

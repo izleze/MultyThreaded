@@ -7,6 +7,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+//consumer 1 producers 3
 public class ProducerConsumerMultipleThreads {
 
     private BlockingQueue<String> strings = new ArrayBlockingQueue<>(30);
@@ -19,7 +20,7 @@ public class ProducerConsumerMultipleThreads {
         AtomicInteger countConsumed = new AtomicInteger(0);
 
         final Runnable producer = () -> {
-            while (true) {
+            while (!ready) {
                 try {
                     if(scanner.hasNextLine()) {
                         strings.put(scanner.nextLine());
@@ -42,7 +43,7 @@ public class ProducerConsumerMultipleThreads {
 
         final Runnable consumer = () -> {
             try {
-                while (true) {
+                while (!ready) {
                     System.out.println(strings.take());
                     countConsumed.incrementAndGet();
                 }
@@ -53,9 +54,6 @@ public class ProducerConsumerMultipleThreads {
 
         Thread consume = new Thread(consumer);
         consume.start();
-
-        while (!ready) {
-        }
 
         System.out.println("Count produced: " + countProduced.get());
         System.out.println("Count consumed: " + countConsumed.get());
