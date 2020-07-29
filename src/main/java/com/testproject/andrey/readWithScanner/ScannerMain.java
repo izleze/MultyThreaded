@@ -1,4 +1,4 @@
-package com.testproject.andrey.ReadWithScanner;
+package com.testproject.andrey.readWithScanner;
 
 import com.testproject.andrey.measureTime.MeasureTime;
 

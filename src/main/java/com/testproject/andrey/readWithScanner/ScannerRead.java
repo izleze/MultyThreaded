@@ -1,4 +1,4 @@
-package com.testproject.andrey.ReadWithScanner;
+package com.testproject.andrey.readWithScanner;
 
 import java.io.File;
 import java.io.FileNotFoundException;

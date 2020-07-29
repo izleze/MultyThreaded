@@ -2,7 +2,6 @@ package com.testproject.andrey.measureTime;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.TemporalUnit;
 
 public class MeasureTime {
 

@@ -1,7 +1,7 @@
-package com.testproject.andrey.ReadWithScanner.ProducerConsumer;
+package com.testproject.andrey.readWithScanner.ProducerConsumer;
 
-import com.testproject.andrey.ReadWithScanner.ScannerRead;
 import com.testproject.andrey.measureTime.MeasureTime;
+import com.testproject.andrey.readWithScanner.ScannerRead;
 
 public class PrinterMain {
     public static void main(String[] args) throws InterruptedException {

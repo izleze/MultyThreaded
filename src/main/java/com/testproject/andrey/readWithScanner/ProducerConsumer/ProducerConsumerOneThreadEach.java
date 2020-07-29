@@ -1,9 +1,8 @@
-package com.testproject.andrey.ReadWithScanner.ProducerConsumer;
+package com.testproject.andrey.readWithScanner.ProducerConsumer;
 
-import com.testproject.andrey.ReadWithScanner.ScannerRead;
+import com.testproject.andrey.readWithScanner.ScannerRead;
 
 import java.util.Scanner;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;

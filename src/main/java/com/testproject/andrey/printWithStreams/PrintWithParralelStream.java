@@ -1,4 +1,4 @@
-package com.testproject.andrey.PrintWithStreams;
+package com.testproject.andrey.printWithStreams;
 
 import com.testproject.andrey.measureTime.MeasureTime;
 
@@ -9,21 +9,24 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-public class PrintWithStream {
+public class PrintWithParralelStream {
     public static void main(String[] args) {
         MeasureTime.startMeasuring();
-        readAndPrintFileStream();
-        MeasureTime.endMeasuringWithMessage("Measuring single stream print");
+        readAndPrintFileParallelStream();
+        MeasureTime.endMeasuringWithMessage("Measuring parallel stream print");
     }
 
-    private static void readAndPrintFileStream() {
+    private static void readAndPrintFileParallelStream() {
         List<String> fileLines = Collections.emptyList();
+
         try {
             fileLines = Files.readAllLines(Paths.get("data/data_q4_2018.csv"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        fileLines.forEach(System.out::println);
+        fileLines
+                .parallelStream()
+                .forEach(System.out::println);
     }
 }
