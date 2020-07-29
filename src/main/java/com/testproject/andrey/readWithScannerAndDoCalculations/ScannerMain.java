@@ -1,4 +1,4 @@
-package com.testproject.andrey.readWithScannerAndDoHeavyCalculations;
+package com.testproject.andrey.readWithScannerAndDoCalculations;
 
 import com.testproject.andrey.measureTime.MeasureTime;
 import com.testproject.andrey.service.ReadyForPrintService;
@@ -18,7 +18,6 @@ public class ScannerMain {
         Scanner innerScanner = ScannerRead.scannerReadDataFile();
         ReadyForPrintService readyForPrintService = new ReadyForPrintService();
         //remove the first line
-        Objects.requireNonNull(innerScanner).nextLine();
         int counter = 0;
         while (Objects.requireNonNull(innerScanner).hasNextLine()) {
             System.out.println(readyForPrintService.dataToShow(innerScanner.nextLine()));

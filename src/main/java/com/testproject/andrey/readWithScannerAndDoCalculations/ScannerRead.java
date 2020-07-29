@@ -1,4 +1,4 @@
-package com.testproject.andrey.readWithScannerAndDoHeavyCalculations;
+package com.testproject.andrey.readWithScannerAndDoCalculations;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -11,7 +11,7 @@ public class CastToDtoService {
     
     public HardDriveStatistics castToDto(String line) {
         int counter = 0;
-        String[] strings = line.split(",");
+        String[] strings = line.split(",",129);
         return HardDriveStatistics.builder()
                 .date(LocalDate.parse(strings[counter++], df))
                 .serial_number(strings[counter++])

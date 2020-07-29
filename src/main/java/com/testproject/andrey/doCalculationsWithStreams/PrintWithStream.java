@@ -1,6 +1,7 @@
-package com.testproject.andrey.doHeavyCalculationsWithStreams;
+package com.testproject.andrey.doCalculationsWithStreams;
 
 import com.testproject.andrey.measureTime.MeasureTime;
+import com.testproject.andrey.service.ReadyForPrintService;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,24 +10,24 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-public class PrintWithParralelStream {
+public class PrintWithStream {
     public static void main(String[] args) {
         MeasureTime.startMeasuring();
-        readAndPrintFileParallelStream();
-        MeasureTime.endMeasuringWithMessage("Measuring parallel stream print");
+        readAndPrintFileStream();
+        MeasureTime.endMeasuringWithMessage("Measuring single stream print");
     }
 
-    private static void readAndPrintFileParallelStream() {
+    private static void readAndPrintFileStream() {
         List<String> fileLines = Collections.emptyList();
-
         try {
             fileLines = Files.readAllLines(Paths.get("data/data_q4_2018.csv"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ReadyForPrintService readyForPrintService = new ReadyForPrintService();
 
-        fileLines
-                .parallelStream()
+        fileLines.stream()
+                .map(readyForPrintService::dataToShow)
                 .forEach(System.out::println);
     }
 }
