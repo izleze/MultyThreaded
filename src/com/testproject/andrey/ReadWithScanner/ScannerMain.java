@@ -10,7 +10,7 @@ public class ScannerMain {
     public static void main(String[] args) {
         MeasureTime.startMeasuring();
         printIteratively();
-        MeasureTime.endMeasuring();
+        MeasureTime.endMeasuringWithMessage("Measuring iteratively print");
     }
 
     private static void printIteratively() {
@@ -20,7 +20,7 @@ public class ScannerMain {
             System.out.println(innerScanner.nextLine());
             counter++;
         }
-        //9357701
+        //expected 9357701
         System.out.println("Lines printed: " + counter);
     }
 }

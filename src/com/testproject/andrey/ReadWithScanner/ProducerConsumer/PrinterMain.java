@@ -5,26 +5,13 @@ import com.testproject.andrey.measureTime.MeasureTime;
 
 public class PrinterMain {
     public static void main(String[] args) throws InterruptedException {
-        oneThreadEach();
-        //9357701
-    }
-
-    private static void oneThreadEach() throws InterruptedException {
         ProducerConsumerOneThreadEach oneThreadEach = new ProducerConsumerOneThreadEach();
         ScannerRead.scannerReadDataFile();
 
         MeasureTime.startMeasuring();
         oneThreadEach.readAndPrintDataOneTreadEach();
-        MeasureTime.endMeasuring();
-    }
-
-    private static void multipleThreads() throws InterruptedException {
-        ProducerConsumerMultipleThreads multipleThreads = new ProducerConsumerMultipleThreads();
-        ScannerRead.scannerReadDataFile();
-
-        MeasureTime.startMeasuring();
-        multipleThreads.readAndPrintDataMultipleThreads();
-        MeasureTime.endMeasuring();
+        MeasureTime.endMeasuringWithMessage("Ended measuring 1 producer scanner and 1 consumer thread");
+        //9357701
     }
 
 }

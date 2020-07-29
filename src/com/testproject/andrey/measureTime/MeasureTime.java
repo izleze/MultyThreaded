@@ -2,6 +2,7 @@ package com.testproject.andrey.measureTime;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.TemporalUnit;
 
 public class MeasureTime {
 
@@ -17,8 +18,16 @@ public class MeasureTime {
     public static Duration endMeasuring() {
         Instant endTime = Instant.now();
         Duration duration = Duration.between(startTime, endTime);
-        System.out.println("Execution time in seconds: " + duration.getSeconds());
+        System.out.println(
+                String.format("Execution time in %d hours %d minutes %d seconds %d nanoseconds",
+                        duration.toHoursPart(), duration.toMinutesPart(),
+                        duration.toSecondsPart(), duration.toNanosPart()));
         startTime = null;
         return duration;
+    }
+
+    public static void endMeasuringWithMessage(String message) {
+        endMeasuring();
+        System.out.println("Above measuring is for " + message);
     }
 }

@@ -5,11 +5,14 @@ import com.testproject.andrey.ReadWithScanner.ScannerRead;
 import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProducerConsumerOneThreadEach {
 
-    private BlockingQueue<String> strings = new ArrayBlockingQueue<>(30);
+    private BlockingQueue<String> scannerLines = new LinkedBlockingQueue<>(40);
+    private volatile boolean readerEnd = false;
+    private volatile boolean consumerEnd = false;
 
     public void readAndPrintDataOneTreadEach() throws InterruptedException {
         Scanner scanner = ScannerRead.scannerReadDataFile();
@@ -17,15 +20,17 @@ public class ProducerConsumerOneThreadEach {
         AtomicInteger countConsumed = new AtomicInteger(0);
 
         final Runnable producer = () -> {
-            while (true) {
-                try {
+            try {
+                while (!readerEnd) {
                     if(scanner.hasNextLine()) {
-                        strings.put(scanner.nextLine());
+                        scannerLines.put(scanner.nextLine());
                         countProduced.incrementAndGet();
+                    } else {
+                        readerEnd = true;
                     }
-                } catch (InterruptedException e) {
-                    System.out.println(e.getMessage());
                 }
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
             }
         };
 
@@ -35,7 +40,11 @@ public class ProducerConsumerOneThreadEach {
         final Runnable consumer = () -> {
             try {
                 while (true) {
-                    System.out.println(strings.take());
+                    if (readerEnd && scannerLines.isEmpty()) {
+                        consumerEnd = true;
+                        break;
+                    }
+                    System.out.println(scannerLines.take());
                     countConsumed.incrementAndGet();
                 }
             } catch (InterruptedException e) {
@@ -46,7 +55,8 @@ public class ProducerConsumerOneThreadEach {
         Thread consume = new Thread(consumer);
         consume.start();
 
-        Thread.sleep(90_000);
+        produce.join();
+        consume.join();
 
         System.out.println("Count produced: " + countProduced.get());
         System.out.println("Count consumed: " + countConsumed.get());
