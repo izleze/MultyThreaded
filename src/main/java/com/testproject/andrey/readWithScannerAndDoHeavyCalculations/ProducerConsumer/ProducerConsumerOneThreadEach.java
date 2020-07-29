@@ -1,6 +1,6 @@
-package com.testproject.andrey.readWithScanner.ProducerConsumer;
+package com.testproject.andrey.readWithScannerAndDoHeavyCalculations.ProducerConsumer;
 
-import com.testproject.andrey.readWithScanner.ScannerRead;
+import com.testproject.andrey.readWithScannerAndDoHeavyCalculations.ScannerRead;
 
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;

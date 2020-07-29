@@ -1,6 +1,7 @@
-package com.testproject.andrey.readWithScanner;
+package com.testproject.andrey.readWithScannerAndDoHeavyCalculations;
 
 import com.testproject.andrey.measureTime.MeasureTime;
+import com.testproject.andrey.service.ReadyForPrintService;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -15,9 +16,12 @@ public class ScannerMain {
 
     private static void printIteratively() {
         Scanner innerScanner = ScannerRead.scannerReadDataFile();
+        ReadyForPrintService readyForPrintService = new ReadyForPrintService();
+        //remove the first line
+        Objects.requireNonNull(innerScanner).nextLine();
         int counter = 0;
         while (Objects.requireNonNull(innerScanner).hasNextLine()) {
-            System.out.println(innerScanner.nextLine());
+            System.out.println(readyForPrintService.dataToShow(innerScanner.nextLine()));
             counter++;
         }
         //expected 9357701
