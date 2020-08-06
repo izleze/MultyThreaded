@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class PrintWithStream {
     public static void main(String[] args) {
@@ -18,15 +19,15 @@ public class PrintWithStream {
     }
 
     private static void readAndPrintFileStream() {
-        List<String> fileLines = Collections.emptyList();
+        Stream<String> fileLines = Stream.<String>builder().build();
         try {
-            fileLines = Files.readAllLines(Paths.get("data/data_q4_2018.csv"), StandardCharsets.UTF_8);
+            fileLines = Files.lines(Paths.get("data/data_q4_2018.csv"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
         ReadyForPrintService readyForPrintService = new ReadyForPrintService();
 
-        fileLines.stream()
+        fileLines
                 .map(readyForPrintService::dataToShow)
                 .forEach(System.out::println);
     }
