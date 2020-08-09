@@ -1,4 +1,4 @@
-package com.testproject.andrey.dto;
+package com.testproject.dto;
 
 import lombok.Builder;
 import lombok.Data;

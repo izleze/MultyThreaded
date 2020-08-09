@@ -1,10 +1,9 @@
-package com.testproject.andrey.service;
+package com.testproject.service;
 
-import com.testproject.andrey.dto.HardDriveStatistics;
+import com.testproject.dto.HardDriveStatistics;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class CastToDtoService {
     private final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");

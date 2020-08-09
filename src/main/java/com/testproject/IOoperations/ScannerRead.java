@@ -1,10 +1,10 @@
-package com.testproject.andrey.readWithScannerAndDoCalculations;
+package com.testproject.IOoperations;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static com.testproject.andrey.unzipper.UnzipUtility.unzipPathAndDest;
+import static com.testproject.unzipper.UnzipUtility.unzipPathAndDest;
 
 public class ScannerRead {
 
@@ -14,7 +14,6 @@ public class ScannerRead {
     private static Scanner scanner = null;
 
     public static Scanner scannerReadDataFile() {
-        unzipPathAndDest();
         if (scanner == null) {
             try {
                 scanner = new Scanner(
@@ -24,5 +23,9 @@ public class ScannerRead {
             }
         }
         return scanner;
+    }
+
+    public static void makeScannerNull() {
+        scanner = null;
     }
 }

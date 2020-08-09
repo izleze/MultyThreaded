@@ -1,4 +1,4 @@
-package com.testproject.andrey.unzipper;
+package com.testproject.unzipper;
 
 import java.io.*;
 import java.util.Set;

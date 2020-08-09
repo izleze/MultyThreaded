@@ -1,6 +1,6 @@
-package com.testproject.andrey.service;
+package com.testproject.service;
 
-import com.testproject.andrey.dto.HardDriveStatistics;
+import com.testproject.dto.HardDriveStatistics;
 
 public class ReadyForPrintService {
     public String dataToShow(String line) {
