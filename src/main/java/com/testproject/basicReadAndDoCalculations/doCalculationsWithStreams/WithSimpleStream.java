@@ -10,21 +10,22 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Stream;
 
 public class WithSimpleStream implements MethodMeasure {
 
     private static void readAndPrintFileStream() {
         System.out.println("Starting simple stream");
-        List<String> fileLines = Collections.emptyList();
+        Stream<String> fileLines = Stream.<String>builder().build();
         try {
-            fileLines = Files.readAllLines(Paths.get("data/data_q4_2018.csv"), StandardCharsets.UTF_8);
+            fileLines = Files.lines(Paths.get("data/data_q4_2018.csv"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
         ReadyForPrintService readyForPrintService = new ReadyForPrintService();
 
         AtomicLong counter = new AtomicLong();
-        fileLines.stream()
+        fileLines
                 .map(readyForPrintService::dataToShow)
                 .forEach(s -> counter.getAndIncrement());
 
